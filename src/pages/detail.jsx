@@ -1,5 +1,5 @@
 import AddComments from "@/components/addcomment";
-import Comments from "@/components/comments";
+import Comments from "@/components/commentsList";
 import Navbar from "@/components/navbar";
 
 export default function Detail() {
