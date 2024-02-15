@@ -18,11 +18,22 @@ export default async function handler(request, response) {
     response.status(200).json(post);
   }
   if (request.method === "PUT") {
-    const postToUpdate = await Post.findByIdAndUpdate(id, request.body);
-    // Find the joke by its ID and update the content that is part of the request body!
-    response.status(200).json(postToUpdate);
-    console.log("placetoupdate",postToUpdate)
-    // If successful, you'll receive an OK status code.
+    try {
+      const postToUpdate = await Post.findByIdAndUpdate(
+        id,
+        request.body,
+        { new: true, runValidators: true } // Options to return the updated document and run validation
+      );
+
+      if (!postToUpdate) {
+        return response.status(404).json({ status: "Not Found" });
+      }
+
+      response.status(200).json(postToUpdate);
+    } catch (error) {
+      console.error(error);
+      response.status(400).json({ error: error.message });
+    }
   }
 
   if (request.method === "DELETE") {
