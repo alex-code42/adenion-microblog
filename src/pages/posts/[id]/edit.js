@@ -67,7 +67,7 @@ export default function EditPage() {
       <h2 id="edit-place">Edit Place</h2>
       <Link href={`/places/${id}`} passHref legacyBehavior>Back
       </Link>
-      <Form onSubmit={handleEditPosts} formName={'edit-place'} defaultData={post} />
+      <Form onSubmit={handleEditPlace} formName={'edit-place'} defaultData={place} />
     </>
   );
 }
