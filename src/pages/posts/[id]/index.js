@@ -75,7 +75,7 @@ export default function PostsDetails() {
                         Delete
                     </a>
             </div>
-            <img class="h-auto max-w-lg rounded-lg" src={postData.imageurl} alt="image description"></img>
+            <img className="h-auto max-w-lg rounded-lg" src={postData.imageurl} alt="image description"></img>
             <div className="text-center mt-5">
                     <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                     {postData.name}
@@ -85,7 +85,7 @@ export default function PostsDetails() {
                     </p>
                 
             </div>
-            <CommentsList />
+            <CommentsList id={id}/>
    </div>
             <CommentForm />
    </div>

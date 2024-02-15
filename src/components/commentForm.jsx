@@ -1,18 +1,54 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+
 export default function CommentForm() {
+  const router = useRouter();
+  const { id } = router.query;
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    text: '',
+    postId: id,
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Here, you can add logic to send the formData to your MongoDB database.
+    // For example, you can use fetch or an API library to make a POST request.
+
+    try {
+      const response = await fetch('/api/comments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      console.log('This are my comments--->>>Data:', formData);
+
+      if (response.ok) {
+        console.log('Data updated successfully!');
+        // Redirect or perform any other actions upon successful submission.
+        mutate();
+        router.push(`/posts/${id}`);
+      } else {
+        console.error('Failed to update data.');
+      }
+    } catch (error) {
+      console.error('Error updating data:', error);
+    }
+  };
+
+
     return (
       <>
     
@@ -25,7 +61,9 @@ export default function CommentForm() {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+            <form 
+            onSubmit={handleSubmit}
+            className="space-y-6" action="#" method="POST">
               <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                   Email address
@@ -33,6 +71,7 @@ export default function CommentForm() {
                 <div className="mt-2">
                   <input
                     id="email"
+                    onChange={handleInputChange}
                     name="email"
                     type="email"
                     autoComplete="email"
@@ -43,18 +82,22 @@ export default function CommentForm() {
               </div>
               <div>
                     <label 
-                    for="small-input" 
+                    htmlFor="name" 
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                     <input 
+                    onChange={handleInputChange}
                     type="text" 
-                    id="small-input" 
+                    id="name" 
                     className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
             </div>
   
               <div>
                
-<label for="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
-<textarea id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+            <label 
+                htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
+                <textarea 
+                id="text" 
+                onChange={handleInputChange} rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
 
          
               </div>
