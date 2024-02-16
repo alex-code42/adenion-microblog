@@ -34,6 +34,11 @@ export default function PostsDetails() {
 
   console.log("my Post Review", postData);
 
+  const getFirst20Words = (text) => {
+    const words = text.split(' ');
+    return words.slice(0, 20).join(' ');
+  };
+
   async function deletePost() {
     const confirmDelete = window.confirm('Are you sure you want to delete this post?');
 
