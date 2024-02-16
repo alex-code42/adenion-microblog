@@ -57,15 +57,16 @@ export default function PostsDetails() {
     <>
     
         <div>
+        <Navbar />
         <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-[#f8f4f3]">
-            <Navbar />
+            
             <div className="mb-10 flex items-center justify-center gap-x-6">
-                    <a
+                    {/* <a
                         href={`${id}/edit`}
                         className="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                         Edit
-                    </a>
+                    </a> */}
                     <div><h2>Detail</h2></div>
                     <a
                         href="#"

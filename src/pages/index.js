@@ -39,7 +39,7 @@ export default function Home() {
     <Navbar />
    <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-[#f8f4f3]">
     
-   <ul role="list" className="divide-y divide-gray-100">
+   <ul role="list" className="divide-y divide-gray-100 mt-8">
   {postData.map((post) => (
     <Link href={`posts/${post._id}`} key={post._id}>
       <li className="flex justify-between gap-x-6 py-5">

@@ -4,7 +4,12 @@ import { useRouter } from 'next/router';
 export default function CommentForm() {
   const router = useRouter();
   const { id } = router.query;
-  
+  const [inputValue, setInputValue] = useState('');
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,7 +21,7 @@ export default function CommentForm() {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value
-    });
+    }),setInputValue(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -97,7 +102,11 @@ export default function CommentForm() {
                 htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
                 <textarea 
                 id="text" 
-                onChange={handleInputChange} rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                onChange={handleInputChange}
+                maxLength={150}
+                 rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                       <p className="text-sm font-semibold leading-6 text-gray-900">Verbleibende Zeichen: {150 - inputValue.length}</p>
+
 
          
               </div>
