@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <div>
     <Navbar />
-   <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-[#f8f4f3]">
+   <div className="min-h-screen flex flex-col items-center pt-6 sm:pl-0 bg-[#f8f4f3]">
     
    <ul role="list" className="divide-y divide-gray-100 mt-8">
   {postData.map((post) => (
